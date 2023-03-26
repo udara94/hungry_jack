@@ -17,6 +17,7 @@ dependencies:
   carousel_slider: ^4.2.1
   google_fonts: ^4.0.3
   flutter_login_facebook: ^1.7.0
+  email_validator: ^2.1.17
 
 dev_dependencies:
   flutter_test:
@@ -30,6 +31,7 @@ flutter:
   assets:
     - assets/logo/logo.png
     - assets/welcome.json
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

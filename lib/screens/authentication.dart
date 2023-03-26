@@ -4,6 +4,7 @@ import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_jack/resources/colors.dart';
 import 'package:hungry_jack/resources/const.dart';
+import 'package:hungry_jack/screens/login.dart';
 
 import '../resources/images.dart';
 import '../utilities/common.dart';
@@ -124,25 +125,30 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 30, right: 30, top: 25),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.red,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 10, bottom: 10),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          Const.loginWithEmail,
-                          style: GoogleFonts.anton(
-                              textStyle: const TextStyle(
-                                  fontSize: 24, color: AppColors.white)),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+                child: GestureDetector(
+                  onTap: (){
+                    moveToLoginPage();
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.red,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            Const.loginWithEmail,
+                            style: GoogleFonts.anton(
+                                textStyle: const TextStyle(
+                                    fontSize: 24, color: AppColors.white)),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -183,6 +189,16 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
           )
         ],
       ),
+    );
+  }
+
+  moveToLoginPage(){
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder:
+            (context) =>
+        const LoginPage()
+        )
     );
   }
 }

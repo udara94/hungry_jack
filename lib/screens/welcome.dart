@@ -66,7 +66,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           return Container(
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: NetworkImage(i.image),
+                                image: AssetImage(i.image),
                                 //whatever image you can put here
                                 fit: BoxFit.contain,
                               ),
