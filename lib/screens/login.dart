@@ -2,6 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_jack/resources/const.dart';
+import 'package:hungry_jack/screens/forgot_password.dart';
 
 import '../resources/colors.dart';
 
@@ -175,15 +176,20 @@ class _LoginPageState extends State<LoginPage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                Const.forgotPassword,
-                                style: GoogleFonts.anton(
-                                    textStyle: const TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        decorationThickness: 2,
-                                        fontSize: 20,
-                                        color: AppColors.ash)),
-                                textAlign: TextAlign.center,
+                              GestureDetector(
+                                child: Text(
+                                  Const.forgotPassword,
+                                  style: GoogleFonts.anton(
+                                      textStyle: const TextStyle(
+                                          decoration: TextDecoration.underline,
+                                          decorationThickness: 2,
+                                          fontSize: 20,
+                                          color: AppColors.ash)),
+                                  textAlign: TextAlign.center,
+                                ),
+                                onTap: () {
+                                  moveToForgotPasswordPage();
+                                },
                               ),
                             ],
                           ),
@@ -212,5 +218,10 @@ class _LoginPageState extends State<LoginPage> {
         _isButtonEnable = false;
       });
     }
+  }
+
+  moveToForgotPasswordPage() {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const ForgotPasswordPage()));
   }
 }

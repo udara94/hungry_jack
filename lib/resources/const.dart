@@ -19,4 +19,8 @@ class Const{
   static const password = "Password";
   static const forgotPassword = "FORGOT PASSWORD";
   static const enterValidEmail = "Please enter a valid email";
+
+  //forgot password screen
+  static const forgotPasswordDescription = "Forgot your password? That's ok, just tell us your email to reset your password";
+  static const send = "SEND";
 }
