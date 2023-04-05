@@ -23,4 +23,15 @@ class Const{
   //forgot password screen
   static const forgotPasswordDescription = "Forgot your password? That's ok, just tell us your email to reset your password";
   static const send = "SEND";
+
+  //signup page
+  static const signUp = "SIGN UP";
+  static const firstName = "First Name";
+  static const lastName = "Last Name";
+  static const emailVerification = "We will send you an email to verify your account";
+  static const mobileNumber = "Mobile number";
+  static const mobileVerification = "We may need your mobile number to identify your order";
+  static const passwordDetails = "Your password must be at least 8 characters long and should include 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character";
+  static const next = "NEXT";
+
 }

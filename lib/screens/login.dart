@@ -27,26 +27,27 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            color: AppColors.black,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 100),
-            child: Container(
-              color: AppColors.white,
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Container(
+              height: 100,
+              color: AppColors.black,
             ),
-          ),
-          const Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: EdgeInsets.only(top: 50, left: 10),
-              child: Icon(Icons.close, size: 35.0, color: AppColors.ash),
+            Padding(
+              padding: const EdgeInsets.only(top: 100),
+              child: Container(
+                color: AppColors.white,
+              ),
             ),
-          ),
-          SingleChildScrollView(
-            child: Padding(
+            const Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: EdgeInsets.only(top: 50, left: 10),
+                child: Icon(Icons.close, size: 35.0, color: AppColors.ash),
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.only(top: 100, left: 30, right: 30),
               child: Column(
                 children: [
@@ -199,9 +200,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ],
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
