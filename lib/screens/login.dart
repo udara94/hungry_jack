@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_jack/resources/const.dart';
 import 'package:hungry_jack/screens/forgot_password.dart';
+import 'package:hungry_jack/widgets/custom_button.dart';
 
 import '../resources/colors.dart';
+import '../widgets/custom_text_form_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -17,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   bool _isButtonEnable = false;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _isPasswordVisible = false;
+  late bool _isPasswordSecure = true;
 
   @override
   void initState() {
@@ -64,43 +66,18 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Text(
-                          Const.email,
-                          style: TextStyle(color: AppColors.ash),
-                        ),
-                        Form(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          child: TextFormField(
-                            onChanged: (val) {
-                              validateForm();
-                            },
-                            controller: _emailController,
-                            validator: (value) =>
-                                EmailValidator.validate(value ?? "")
-                                    ? null
-                                    : Const.enterValidEmail,
-                            decoration: const InputDecoration(
-                                focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: AppColors.black, width: 2.0)),
-                                border: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 2.0, color: AppColors.black)),
-                                hintText: Const.placeholderEmail,
-                                hintStyle: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.lightAsh)),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 16),
+                      child: CustomTextFormField(
+                        isSecure: false,
+                        text: Const.email,
+                        onChanged: () {
+                          validateForm();
+                        },
+                        controller: _emailController,
+                        validationMsg: Const.enterValidEmail,
+                        hintTextVal: Const.placeholderEmail,
+                      )),
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
@@ -108,69 +85,35 @@ class _LoginPageState extends State<LoginPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const Text(
-                          Const.password,
-                          style: TextStyle(color: AppColors.ash),
-                        ),
-                        TextFormField(
-                          obscureText: _isPasswordVisible,
-                          onChanged: (val) {
+                        CustomTextFormField(
+                          text: Const.password,
+                          hintTextVal: Const.password,
+                          isSecure: _isPasswordSecure,
+                          controller: _passwordController,
+                          onChanged: () {
                             validateForm();
                           },
-                          controller: _passwordController,
-                          decoration: InputDecoration(
-                              suffixIcon: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    _isPasswordVisible = !_isPasswordVisible;
-                                  });
-                                },
-                                child: const Icon(Icons.remove_red_eye_outlined,
-                                    color: AppColors.red),
-                              ),
-                              focusedBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: AppColors.black, width: 2.0)),
-                              border: const UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 2.0, color: AppColors.black)),
-                              hintText: Const.password,
-                              hintStyle: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.lightAsh)),
+                          suffixIcon: Icons.remove_red_eye_outlined,
+                          suffixIconColor: AppColors.red,
+                          onSuffixIconTap: () {
+                            setState(() {
+                              _isPasswordSecure = !_isPasswordSecure;
+                            });
+                          },
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 40),
-                          child: GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: _isButtonEnable
-                                    ? AppColors.black
-                                    : AppColors.lightAsh,
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 10, bottom: 10),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      Const.login,
-                                      style: GoogleFonts.anton(
-                                          textStyle: const TextStyle(
-                                              fontSize: 24,
-                                              color: AppColors.white)),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                            padding: const EdgeInsets.symmetric(vertical: 40),
+                            child: CustomButton(
+                              btnText: Const.login,
+                              onTap: () {},
+                              backgroundColor: _isButtonEnable
+                                  ? AppColors.black
+                                  : AppColors.lightAsh,
+                              borderRadius: 15,
+                              verticalPadding: 10,
+                              textColor: AppColors.white,
+                              textSize: 24,
+                            )),
                         Padding(
                           padding: const EdgeInsets.only(top: 10, bottom: 10),
                           child: Row(

@@ -9,6 +9,7 @@ import 'package:hungry_jack/screens/signup.dart';
 
 import '../resources/images.dart';
 import '../utilities/common.dart';
+import '../widgets/custom_button.dart';
 
 class AuthenticationPage extends StatefulWidget {
   final fb = FacebookLogin();
@@ -28,10 +29,10 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
       body: Center(
         child: SingleChildScrollView(
           child: ConstrainedBox(
-            constraints:
-                BoxConstraints(minHeight: CommonUtils.getDeviceHeight(context)),
-            child: IntrinsicHeight(
-              child: Stack(
+              constraints: BoxConstraints(
+                  minHeight: CommonUtils.getDeviceHeight(context)),
+              child: IntrinsicHeight(
+                  child: Stack(
                 children: [
                   Column(
                     children: [
@@ -101,132 +102,73 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                         height: 70,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 30, right: 30),
-                        child: GestureDetector(
-                          onTap: () async {
-                            final fb = widget.fb;
-                            final res = await fb.logIn(permissions: [
-                              FacebookPermission.publicProfile,
-                              FacebookPermission.email,
-                            ]);
+                          padding: const EdgeInsets.only(left: 30, right: 30),
+                          child: CustomButton(
+                            onTap: () async {
+                              final fb = widget.fb;
+                              final res = await fb.logIn(permissions: [
+                                FacebookPermission.publicProfile,
+                                FacebookPermission.email,
+                              ]);
 
-                            if (kDebugMode) {
-                              print('Access Token: ${res.status}');
-                            }
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: AppColors.fbBlue,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 10, bottom: 10),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Icon(Icons.facebook,
-                                      size: 25.0, color: AppColors.white),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    Const.continueWithFB,
-                                    style: GoogleFonts.anton(
-                                        textStyle: const TextStyle(
-                                            fontSize: 24,
-                                            color: AppColors.white)),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                              if (kDebugMode) {
+                                print('Access Token: ${res.status}');
+                              }
+                            },
+                            btnText: Const.continueWithFB,
+                            borderRadius: 15,
+                            verticalPadding: 10,
+                            backgroundColor: AppColors.fbBlue,
+                            textColor: AppColors.white,
+                            textSize: 24,
+                            icon: Icons.facebook,
+                            iconColor: AppColors.white,
+                            iconSize: 20,
+                          )),
+                      Padding(
+                          padding: const EdgeInsets.only(
+                              left: 30, right: 30, top: 25),
+                          child: CustomButton(
+                            onTap: () {
+                              moveToLoginPage();
+                            },
+                            btnText: Const.loginWithEmail,
+                            textSize: 24,
+                            textColor: AppColors.white,
+                            backgroundColor: AppColors.red,
+                            verticalPadding: 10,
+                            borderRadius: 15,
+                          )),
                       Padding(
                         padding:
                             const EdgeInsets.only(left: 30, right: 30, top: 25),
-                        child: GestureDetector(
+                        child: CustomButton(
+                          btnText: Const.signupWithEmail,
                           onTap: () {
-                            moveToLoginPage();
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: AppColors.red,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 10, bottom: 10),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    Const.loginWithEmail,
-                                    style: GoogleFonts.anton(
-                                        textStyle: const TextStyle(
-                                            fontSize: 24,
-                                            color: AppColors.white)),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(left: 30, right: 30, top: 25),
-                        child: GestureDetector(
-                          onTap: (){
                             moveToSignUpPage();
                           },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: AppColors.red,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 10, bottom: 10),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    Const.signupWithEmail,
-                                    style: GoogleFonts.anton(
-                                        textStyle: const TextStyle(
-                                            fontSize: 24,
-                                            color: AppColors.white)),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                          verticalPadding: 10,
+                          backgroundColor: AppColors.red,
+                          borderRadius: 15,
+                          textColor: AppColors.white,
+                          textSize: 24,
                         ),
                       ),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 30),
+                        child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Text(
+                            Const.privacyPolicy,
+                            style: TextStyle(fontSize: 18),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      )
                     ],
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 30, right: 30, bottom: 30),
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Text(
-                        Const.privacyPolicy,
-                        style: TextStyle(fontSize: 18),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  )
                 ],
-              ),
-            ),
-          ),
+              ))),
         ),
       ),
     );

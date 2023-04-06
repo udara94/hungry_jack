@@ -10,7 +10,12 @@ class CustomTextFormField extends StatelessWidget {
       this.onChanged,
       this.validationMsg,
       this.hintTextVal,
-        this.description,
+      this.description,
+      this.suffixIcon,
+      this.onSuffixIconTap,
+      this.suffixIconColor,
+      this.keyboardType,
+      required this.isSecure,
       required this.text})
       : super(key: key);
   final TextEditingController? controller;
@@ -19,6 +24,11 @@ class CustomTextFormField extends StatelessWidget {
   final String? hintTextVal;
   final String text;
   final String? description;
+  final bool isSecure;
+  final IconData? suffixIcon;
+  final Function? onSuffixIconTap;
+  final Color? suffixIconColor;
+  final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +36,7 @@ class CustomTextFormField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-         Text(
+        Text(
           text,
           style: const TextStyle(color: AppColors.ash),
         ),
@@ -38,33 +48,45 @@ class CustomTextFormField extends StatelessWidget {
                 onChanged!();
               }
             },
+            keyboardType: keyboardType,
+            obscureText: isSecure,
             controller: controller,
             validator: (value) =>
                 EmailValidator.validate(value ?? "") ? null : validationMsg,
-            decoration:  InputDecoration(
+            decoration: InputDecoration(
+                suffixIcon: suffixIcon != null
+                    ? GestureDetector(
+                        onTap: () {
+                          onSuffixIconTap != null ? onSuffixIconTap!() : {};
+                        },
+                        child: Icon(suffixIcon, color: suffixIconColor),
+                      )
+                    : const SizedBox(),
                 focusedBorder: const UnderlineInputBorder(
                     borderSide: BorderSide(color: AppColors.black, width: 2.0)),
-                border:  const UnderlineInputBorder(
+                border: const UnderlineInputBorder(
                     borderSide: BorderSide(width: 2.0, color: AppColors.black)),
                 hintText: hintTextVal,
                 hintStyle: const TextStyle(
                     fontWeight: FontWeight.bold, color: AppColors.lightAsh)),
           ),
         ),
-         const SizedBox(
+        const SizedBox(
           height: 20,
         ),
-        description != null ? Column(
-          children: [
-            Text(
-              description!,
-              style: const TextStyle(color: AppColors.ash),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-          ],
-        ): const SizedBox()
+        description != null
+            ? Column(
+                children: [
+                  Text(
+                    description!,
+                    style: const TextStyle(color: AppColors.ash, fontSize: 12),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                ],
+              )
+            : const SizedBox()
       ],
     );
   }

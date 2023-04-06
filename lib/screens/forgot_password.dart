@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_jack/resources/colors.dart';
 import 'package:hungry_jack/utilities/common.dart';
+import 'package:hungry_jack/widgets/custom_text_form_field.dart';
 
 import '../resources/const.dart';
 
@@ -59,46 +60,19 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       Column(
                         children: [
                           Container(
-                            child: Padding(
+                            child:  Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 30, vertical: 30),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    Const.email,
-                                    style: TextStyle(color: AppColors.ash),
-                                  ),
-                                  Form(
-                                    autovalidateMode:
-                                        AutovalidateMode.onUserInteraction,
-                                    child: TextFormField(
-                                      onChanged: (val) {
-                                        validateForm();
-                                      },
-                                      controller: _emailController,
-                                      validator: (value) =>
-                                          EmailValidator.validate(value ?? "")
-                                              ? null
-                                              : Const.enterValidEmail,
-                                      decoration: const InputDecoration(
-                                          focusedBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: AppColors.black,
-                                                  width: 2.0)),
-                                          border: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  width: 2.0,
-                                                  color: AppColors.black)),
-                                          hintText: Const.placeholderEmail,
-                                          hintStyle: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: AppColors.lightAsh)),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              child: CustomTextFormField(
+                                text: Const.email,
+                                isSecure: false,
+                                onChanged: (){
+                                  validateForm();
+                                },
+                                controller: _emailController,
+                                validationMsg: Const.enterValidEmail,
+                                hintTextVal: Const.placeholderEmail,
+                              )
                             ),
                           ),
                         ],
