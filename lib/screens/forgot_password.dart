@@ -2,7 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_jack/resources/colors.dart';
-import 'package:hungry_jack/utilities/common.dart';
+import '../utils/common.dart';
 import 'package:hungry_jack/widgets/custom_text_form_field.dart';
 
 import '../resources/const.dart';

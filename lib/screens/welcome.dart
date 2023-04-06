@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:hungry_jack/models/welcome.dart';
 import 'package:hungry_jack/resources/colors.dart';
 import 'package:hungry_jack/screens/authentication.dart';
-import 'package:hungry_jack/utilities/common.dart';
+import '../utils/common.dart';
 
 import '../resources/images.dart';
 

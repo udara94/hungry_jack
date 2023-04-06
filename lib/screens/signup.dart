@@ -7,7 +7,7 @@ import 'package:hungry_jack/widgets/custom_text_form_field.dart';
 import '../resources/colors.dart';
 import '../resources/const.dart';
 import '../resources/images.dart';
-import '../utilities/common.dart';
+import '../utils/common.dart';
 import '../widgets/custom_button.dart';
 
 class SignUpPage extends StatefulWidget {

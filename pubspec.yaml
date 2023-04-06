@@ -18,6 +18,12 @@ dependencies:
   google_fonts: ^4.0.3
   flutter_login_facebook: ^1.7.0
   email_validator: ^2.1.17
+  flutter_bloc:
+  equatable:
+  firebase_core:
+  cloud_firestore:
+  firebase_auth:
+  connectivity:
 
 dev_dependencies:
   flutter_test:

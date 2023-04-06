@@ -8,7 +8,7 @@ import 'package:hungry_jack/screens/login.dart';
 import 'package:hungry_jack/screens/signup.dart';
 
 import '../resources/images.dart';
-import '../utilities/common.dart';
+import '../utils/common.dart';
 import '../widgets/custom_button.dart';
 
 class AuthenticationPage extends StatefulWidget {
