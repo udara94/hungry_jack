@@ -24,6 +24,7 @@ dependencies:
   cloud_firestore:
   firebase_auth:
   connectivity:
+  sprintf:
 
 dev_dependencies:
   flutter_test:

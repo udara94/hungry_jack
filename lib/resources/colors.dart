@@ -9,4 +9,5 @@ class AppColors {
   static const Color fbBlue = Color(0xFF3b5999);
   static const Color ash = Color(0xFF524F4F);
   static const Color lightAsh = Color(0xFFE1DEDE);
+  static const Color mediumAsh = Color(0xFF9d9d9d);
 }

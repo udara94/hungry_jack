@@ -6,11 +6,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hungry_jack/bloc/authentication/authentication_event.dart';
 import 'package:hungry_jack/bloc/authentication/authentication_state.dart';
 
+import '../../services/firebase_service.dart';
+
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState>{
+  final FirebaseService _firebaseService = FirebaseService();
   AuthenticationBloc(): super(AuthenticationEmpty()){
     on<CheckAuthentication>((event, emit) {
       try{
-        final currentUser = FirebaseAuth.instance.currentUser;
+        final currentUser =  _firebaseService.firebaseAuth.currentUser;
         if(currentUser != null){
           emit(AuthenticationValid());
         }else{
@@ -23,21 +26,19 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState>{
         emit(AuthenticationError());
       }
     });
-  }
-
-  Stream<AuthenticationState> mapEventToState(AuthenticationEvent event)async*{
-    if(event is CheckAuthentication){
+    on<SignUpUser>((event, emit) async {
       try{
-        final currentUser = FirebaseAuth.instance.currentUser;
-        if(currentUser != null){
-          yield AuthenticationValid();
-        }else{
-          yield UnAuthentication();
-        }
+        emit(SignUpInProgress());
+        print(event.userProfile);
+        await _firebaseService.createAccount(event.userProfile);
+        emit(SignUpCompleted());
       }catch(e){
-        yield AuthenticationError();
+        if (kDebugMode) {
+          print(e);
+        }
+        emit(SignUpError());
       }
-    }
+    });
   }
 
 }

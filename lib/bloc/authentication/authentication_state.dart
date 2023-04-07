@@ -12,3 +12,11 @@ class UnAuthentication extends AuthenticationState {}
 class AuthenticationValid extends AuthenticationState {}
 
 class AuthenticationError extends AuthenticationState {}
+
+class SignUpEmpty extends AuthenticationState {}
+
+class SignUpInProgress extends AuthenticationState {}
+
+class SignUpCompleted extends AuthenticationState {}
+
+class SignUpError extends AuthenticationState {}

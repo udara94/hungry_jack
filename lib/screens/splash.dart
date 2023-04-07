@@ -7,8 +7,10 @@ import 'package:hungry_jack/bloc/authentication/authentication_state.dart';
 import 'package:hungry_jack/resources/colors.dart';
 import 'package:hungry_jack/resources/const.dart';
 import 'package:hungry_jack/resources/images.dart';
+import 'package:hungry_jack/screens/home.dart';
 import 'package:hungry_jack/screens/welcome.dart';
 import '../utils/common.dart';
+import 'email_verify.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -34,9 +36,12 @@ class _SplashScreenState extends State<SplashScreen> {
             BlocProvider.of<AuthenticationBloc>(context)
                 .add(CheckAuthentication());
           } else if (state is AuthenticationValid) {
+            Future.delayed(const Duration(seconds: 3), () {
+              moveToHomePage(context);
+            });
           } else if (state is UnAuthentication) {
             Future.delayed(const Duration(seconds: 3), () {
-              moveToNextPage(context);
+              moveToWelcomePage(context);
             });
           } else if (state is AuthenticationError) {
             if (kDebugMode) {
@@ -80,8 +85,12 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  moveToNextPage(BuildContext context) {
+  moveToWelcomePage(BuildContext context) {
     Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (context) => const WelcomeScreen()));
+  }
+  moveToHomePage(BuildContext context) {
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => const EmailVerifyPage()));
   }
 }

@@ -1,5 +1,5 @@
-
 import 'package:equatable/equatable.dart';
+import 'package:hungry_jack/models/user.dart';
 
 abstract class AuthenticationEvent extends Equatable {}
 
@@ -9,6 +9,15 @@ class CheckAuthentication extends AuthenticationEvent {
 }
 
 class LogoutEvent extends AuthenticationEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class SignUpUser extends AuthenticationEvent {
+  final UserProfile userProfile;
+
+  SignUpUser(this.userProfile);
+
   @override
   List<Object?> get props => [];
 }

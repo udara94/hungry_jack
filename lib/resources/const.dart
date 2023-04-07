@@ -34,4 +34,13 @@ class Const{
   static const passwordDetails = "Your password must be at least 8 characters long and should include 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character";
   static const next = "NEXT";
 
+  //verify email page
+  static const verifyEmail = "VERIFY YOUR EMAIL";
+  static const verificationDescription = "One last step. We've sent an email to %s to verify your account. Simply click on the link in the email and you're good to go";
+  static const verifiedEmail = "I  HAVE VERIFIED";
+  static const sendAnotherEmail = "SEND ANOTHER EMAIL";
+  static const changeEmail = "CHANGE EMAIL";
+  static const needHelp = "NEED HELP?";
+
+
 }
