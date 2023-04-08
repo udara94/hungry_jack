@@ -43,5 +43,7 @@ class Const{
   static const needHelp = "NEED HELP?";
   static const unableToVerify = "We were unable to verify your account. Please find your verification email and try again";
 
-
+  //FAQ page
+  static const faqs = "FAQS";
+  static const faqDescription = "Can't find what you're looking for? complete the feedback form and we'll get back to you as soon as possible";
 }

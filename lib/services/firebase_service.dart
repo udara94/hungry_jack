@@ -8,6 +8,8 @@ class FirebaseService {
 
   final CollectionReference userRef =
       FirebaseFirestore.instance.collection("Users");
+  final CollectionReference faqRef =
+      FirebaseFirestore.instance.collection("Faqs");
 
   Future<String?> loginUser(String email, String password) async {
     try {
@@ -80,5 +82,9 @@ class FirebaseService {
   //logout user
   Future<void> signOut() async {
     await firebaseAuth.signOut();
+  }
+
+  Future<QuerySnapshot> getFAQList() async {
+    return faqRef.get();
   }
 }

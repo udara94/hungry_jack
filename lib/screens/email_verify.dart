@@ -5,6 +5,7 @@ import 'package:hungry_jack/bloc/profile/profile_bloc.dart';
 import 'package:hungry_jack/bloc/profile/profile_event.dart';
 import 'package:hungry_jack/bloc/profile/profile_state.dart';
 import 'package:hungry_jack/models/user.dart';
+import 'package:hungry_jack/screens/faq.dart';
 
 import '../resources/colors.dart';
 import '../resources/const.dart';
@@ -12,6 +13,8 @@ import '../resources/images.dart';
 import '../utils/common.dart';
 import '../widgets/custom_button.dart';
 import 'package:sprintf/sprintf.dart';
+
+import 'login.dart';
 
 class EmailVerifyPage extends StatefulWidget {
   const EmailVerifyPage({Key? key}) : super(key: key);
@@ -180,8 +183,8 @@ class _EmailVerifyPageState extends State<EmailVerifyPage> {
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                children: const [
-                                  Text(
+                                children:  [
+                                  const Text(
                                     Const.changeEmail,
                                     style: TextStyle(
                                       fontSize: 16,
@@ -200,24 +203,29 @@ class _EmailVerifyPageState extends State<EmailVerifyPage> {
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
-                                  Text(
-                                    Const.needHelp,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.transparent,
-                                      fontWeight: FontWeight.bold,
-                                      decoration: TextDecoration.underline,
-                                      decorationStyle:
-                                          TextDecorationStyle.solid,
-                                      shadows: [
-                                        Shadow(
-                                            offset: Offset(0, -3),
-                                            color: AppColors.mediumAsh)
-                                      ],
-                                      decorationColor: AppColors.lightAsh,
-                                      decorationThickness: 5,
+                                  GestureDetector(
+                                    onTap: (){
+                                      _moveToFAQPage(context);
+                                    },
+                                    child: const Text(
+                                      Const.needHelp,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.transparent,
+                                        fontWeight: FontWeight.bold,
+                                        decoration: TextDecoration.underline,
+                                        decorationStyle:
+                                            TextDecorationStyle.solid,
+                                        shadows: [
+                                          Shadow(
+                                              offset: Offset(0, -3),
+                                              color: AppColors.mediumAsh)
+                                        ],
+                                        decorationColor: AppColors.lightAsh,
+                                        decorationThickness: 5,
+                                      ),
+                                      textAlign: TextAlign.center,
                                     ),
-                                    textAlign: TextAlign.center,
                                   ),
                                 ],
                               ),
@@ -236,5 +244,10 @@ class _EmailVerifyPageState extends State<EmailVerifyPage> {
 
   _checkEmailVerification(BuildContext context){
     BlocProvider.of<ProfileBloc>(context).add(CheckEmailVerified());
+  }
+
+  _moveToFAQPage(BuildContext context){
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const FAQPage()));
   }
 }
