@@ -20,3 +20,20 @@ class SignUpInProgress extends AuthenticationState {}
 class SignUpCompleted extends AuthenticationState {}
 
 class SignUpError extends AuthenticationState {}
+
+class SignOutBefore extends AuthenticationState {}
+
+class SignOutInProgress extends AuthenticationState {}
+
+class SignOutComplete extends AuthenticationState {}
+
+class SignOutError extends AuthenticationState {}
+
+class SignInInProgress extends AuthenticationState {}
+
+class SignInComplete extends AuthenticationState {}
+
+class SignInError extends AuthenticationState {
+  final String error;
+  SignInError(this.error);
+}

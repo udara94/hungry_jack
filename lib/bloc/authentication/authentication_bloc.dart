@@ -29,7 +29,6 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState>{
     on<SignUpUser>((event, emit) async {
       try{
         emit(SignUpInProgress());
-        print(event.userProfile);
         await _firebaseService.createAccount(event.userProfile);
         emit(SignUpCompleted());
       }catch(e){
@@ -39,6 +38,28 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState>{
         emit(SignUpError());
       }
     });
+    on<SignOutEvent>((event, emit) async{
+      try{
+        emit(SignOutInProgress());
+        await _firebaseService.signOut();
+        emit(SignUpCompleted());
+      }catch(e){
+        emit(SignOutError());
+      }
+    });
+    on<SignInUser>((event, emit) async{
+      try{
+        emit(SignInInProgress());
+        String? response = await _firebaseService.loginUser(event.email, event.password);
+        if(response != null){
+         return emit(SignInError(response));
+        }
+        emit(SignInComplete());
+      }catch(e){
+        emit(SignInError(e.toString()));
+      }
+    });
+
   }
 
 }

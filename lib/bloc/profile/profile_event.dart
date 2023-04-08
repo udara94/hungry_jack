@@ -7,3 +7,8 @@ class LoadUserProfile extends ProfileEvent {
   @override
   List<Object?> get props => [];
 }
+
+class CheckEmailVerified extends ProfileEvent {
+  @override
+  List<Object?> get props => [];
+}

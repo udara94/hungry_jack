@@ -7,21 +7,21 @@ class FirebaseService {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   final CollectionReference userRef =
-  FirebaseFirestore.instance.collection("Users");
+      FirebaseFirestore.instance.collection("Users");
 
   Future<String?> loginUser(String email, String password) async {
-    try{
-      await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
       return null;
-    }on FirebaseAuthException catch (e){
+    } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         return 'The password provided is too weak.';
       } else if (e.code == 'email-already-in-use') {
         return 'The account already exists for that email.';
       }
       return e.message;
-    }
-    catch(e){
+    } catch (e) {
       return e.toString();
     }
   }
@@ -31,14 +31,12 @@ class FirebaseService {
     try {
       final User? user =
           (await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: userProfile.email,
-            password: userProfile.password,
-          ))
+        email: userProfile.email,
+        password: userProfile.password,
+      ))
               .user;
       if (user != null) {
-        await userRef
-            .doc(user.uid)
-            .set(userProfile.toMap());
+        await userRef.doc(user.uid).set(userProfile.toMap());
         sendVerificationEmail();
         return null;
       } else {
@@ -59,18 +57,28 @@ class FirebaseService {
     }
   }
 
-  void sendVerificationEmail(){
+  void sendVerificationEmail() {
     firebaseAuth.currentUser?.sendEmailVerification();
   }
 
-  Future<UserProfile> getProfile()async{
+  Future<bool> checkEmailVerified() async {
+    await firebaseAuth.currentUser?.reload();
+    bool isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
+    return isEmailVerified;
+  }
+
+  Future<UserProfile> getProfile() async {
     DocumentSnapshot user = await userRef.doc(getUserId()).get();
-    UserProfile profile =  UserProfile.fromDocument(user);
-    print(profile);
+    UserProfile profile = UserProfile.fromDocument(user);
     return profile;
   }
 
   String getUserId() {
     return firebaseAuth.currentUser!.uid;
+  }
+
+  //logout user
+  Future<void> signOut() async {
+    await firebaseAuth.signOut();
   }
 }

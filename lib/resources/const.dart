@@ -41,6 +41,7 @@ class Const{
   static const sendAnotherEmail = "SEND ANOTHER EMAIL";
   static const changeEmail = "CHANGE EMAIL";
   static const needHelp = "NEED HELP?";
+  static const unableToVerify = "We were unable to verify your account. Please find your verification email and try again";
 
 
 }

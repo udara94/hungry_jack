@@ -17,3 +17,10 @@ class ProfileLoaded extends ProfileState {
 }
 
 class ProfileLoadError extends ProfileState {}
+
+class VerifyEmailInProgress extends ProfileState {}
+
+class VerifyEmailCompleted extends ProfileState {}
+
+class VerifyEmailError extends ProfileState {}
+

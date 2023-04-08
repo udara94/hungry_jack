@@ -21,6 +21,21 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState>{
         emit(ProfileLoadError());
       }
     });
+    on<CheckEmailVerified>((event, emit) async {
+      try{
+        emit(VerifyEmailInProgress());
+        bool isVerified = await _firebaseService.checkEmailVerified();
+        if(!isVerified){
+          return emit(VerifyEmailError());
+        }
+        emit(VerifyEmailCompleted());
+      }catch(e){
+        if (kDebugMode) {
+          print(e);
+        }
+        emit(VerifyEmailError());
+      }
+    });
   }
 
 }

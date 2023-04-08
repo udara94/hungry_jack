@@ -22,6 +22,7 @@ class EmailVerifyPage extends StatefulWidget {
 
 class _EmailVerifyPageState extends State<EmailVerifyPage> {
   String? _email = "";
+  bool _isEmailVerified = true;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +35,11 @@ class _EmailVerifyPageState extends State<EmailVerifyPage> {
           } else if (state is ProfileLoaded) {
             UserProfile user = state.profile;
             _email = user.email ?? "";
+          }else if(state is VerifyEmailCompleted){
+            _isEmailVerified = true;
+            Navigator.pop(context);
+          }else if(state is VerifyEmailError){
+            _isEmailVerified = false;
           }
           return Scaffold(
             body: Center(
@@ -58,12 +64,17 @@ class _EmailVerifyPageState extends State<EmailVerifyPage> {
                             ),
                           ],
                         ),
-                        const Align(
+                         Align(
                           alignment: Alignment.topLeft,
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 50, left: 10),
-                            child: Icon(Icons.close,
-                                size: 35.0, color: AppColors.ash),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.pop(context);
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.only(top: 50, left: 10),
+                              child: Icon(Icons.close,
+                                  size: 35.0, color: AppColors.ash),
+                            ),
                           ),
                         ),
                         Column(
@@ -109,9 +120,27 @@ class _EmailVerifyPageState extends State<EmailVerifyPage> {
                                   sprintf(
                                       Const.verificationDescription, [_email]),
                                   textAlign: TextAlign.center,
-                                  style: const TextStyle(fontSize: 16),
+                                  style: const TextStyle(fontSize: 14),
                                 ),
                               ),
+                            ),
+                            _isEmailVerified ?const SizedBox() :Column(
+                              children: [
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Container(
+                                  color: AppColors.lightRed,
+                                  child: const Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                                    child: Text(
+                                      Const.unableToVerify,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontSize: 12, color: AppColors.red),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                             const SizedBox(
                               height: 10,
@@ -120,7 +149,9 @@ class _EmailVerifyPageState extends State<EmailVerifyPage> {
                                 padding: const EdgeInsets.only(
                                     left: 30, right: 30, top: 25),
                                 child: CustomButton(
-                                  onTap: () {},
+                                  onTap: () {
+                                    _checkEmailVerification(context);
+                                  },
                                   btnText: Const.verifiedEmail,
                                   textSize: 20,
                                   textColor: AppColors.white,
@@ -133,7 +164,9 @@ class _EmailVerifyPageState extends State<EmailVerifyPage> {
                                   left: 30, right: 30, top: 25),
                               child: CustomButton(
                                 btnText: Const.sendAnotherEmail,
-                                onTap: () {},
+                                onTap: () {
+
+                                },
                                 verticalPadding: 10,
                                 backgroundColor: AppColors.red,
                                 borderRadius: 15,
@@ -199,5 +232,9 @@ class _EmailVerifyPageState extends State<EmailVerifyPage> {
         },
       ),
     );
+  }
+
+  _checkEmailVerification(BuildContext context){
+    BlocProvider.of<ProfileBloc>(context).add(CheckEmailVerified());
   }
 }

@@ -10,4 +10,5 @@ class AppColors {
   static const Color ash = Color(0xFF524F4F);
   static const Color lightAsh = Color(0xFFE1DEDE);
   static const Color mediumAsh = Color(0xFF9d9d9d);
+  static const Color lightRed = Color(0xFFfae6e8);
 }

@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:hungry_jack/models/welcome.dart';
 import 'package:hungry_jack/resources/colors.dart';
 import 'package:hungry_jack/screens/authentication.dart';
+import 'package:hungry_jack/services/shared_preference.dart';
 import '../utils/common.dart';
 
 import '../resources/images.dart';
@@ -142,7 +143,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return welcomeItems;
   }
 
-  moveToLoginPage(){
+  moveToLoginPage() async {
+    await SharedPreferenceService.setWelcomeScreenIsLoaded(true);
+    if (!mounted) return;
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder:

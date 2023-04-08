@@ -25,6 +25,7 @@ dependencies:
   firebase_auth:
   connectivity:
   sprintf:
+  shared_preferences:
 
 dev_dependencies:
   flutter_test:

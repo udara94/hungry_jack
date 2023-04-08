@@ -8,7 +8,7 @@ class CheckAuthentication extends AuthenticationEvent {
   List<Object?> get props => [];
 }
 
-class LogoutEvent extends AuthenticationEvent {
+class SignOutEvent extends AuthenticationEvent {
   @override
   List<Object?> get props => [];
 }
@@ -17,6 +17,15 @@ class SignUpUser extends AuthenticationEvent {
   final UserProfile userProfile;
 
   SignUpUser(this.userProfile);
+
+  @override
+  List<Object?> get props => [];
+}
+
+class SignInUser extends AuthenticationEvent {
+  final String email;
+  final String password;
+  SignInUser(this.email, this.password);
 
   @override
   List<Object?> get props => [];
