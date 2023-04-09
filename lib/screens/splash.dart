@@ -101,6 +101,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   moveToHomePage(BuildContext context) {
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => const EmailVerifyPage()));
+        context, MaterialPageRoute(builder: (context) => const HomePage()));
   }
 }

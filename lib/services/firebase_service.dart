@@ -87,4 +87,8 @@ class FirebaseService {
   Future<QuerySnapshot> getFAQList() async {
     return faqRef.get();
   }
+
+  Future<void> resetPassword({required String email}) async {
+    await firebaseAuth.sendPasswordResetEmail(email: email);
+  }
 }

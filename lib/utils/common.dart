@@ -10,4 +10,12 @@ class CommonUtils {
   static double getDeviceWidth(BuildContext context){
     return MediaQuery.of(context).size.width;
   }
+
+  /// Hide Keyboard
+  static void hideKeyBoard(BuildContext context) {
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus) {
+      currentFocus.unfocus();
+    }
+  }
 }

@@ -75,12 +75,17 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
                             ],
                           ),
-                          const Align(
+                           Align(
                             alignment: Alignment.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 50, left: 10),
-                              child:
-                              Icon(Icons.close, size: 35.0, color: AppColors.ash),
+                            child: GestureDetector(
+                              onTap: (){
+                                Navigator.pop(context);
+                              },
+                              child: const Padding(
+                                padding: EdgeInsets.only(top: 50, left: 10),
+                                child:
+                                Icon(Icons.close, size: 35.0, color: AppColors.ash),
+                              ),
                             ),
                           ),
                           Padding(

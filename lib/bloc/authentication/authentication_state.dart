@@ -37,3 +37,12 @@ class SignInError extends AuthenticationState {
   final String error;
   SignInError(this.error);
 }
+
+class ResetPasswordInProgress extends AuthenticationState {}
+
+class ResetPasswordCompleted extends AuthenticationState {}
+
+class ResetPasswordError extends AuthenticationState {
+  final String error;
+  ResetPasswordError(this.error);
+}

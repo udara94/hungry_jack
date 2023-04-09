@@ -4,8 +4,12 @@ import 'package:hungry_jack/bloc/authentication/authentication_bloc.dart';
 import 'package:hungry_jack/bloc/authentication/authentication_event.dart';
 import 'package:hungry_jack/bloc/authentication/authentication_state.dart';
 import 'package:hungry_jack/resources/colors.dart';
+import 'package:hungry_jack/resources/const.dart';
 import 'package:hungry_jack/screens/authentication.dart';
+import 'package:hungry_jack/utils/common.dart';
 import 'package:hungry_jack/widgets/custom_button.dart';
+
+import '../widgets/custom_alert.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -46,6 +50,15 @@ class _HomePageState extends State<HomePage> {
                           onTap:() {
                             _signOutUser(context);
                       },
+                        textSize: 24,
+                        backgroundColor: AppColors.red,
+                        textColor: AppColors.white,
+                      ),
+                      const SizedBox(height: 10,),
+                      CustomButton(
+                        btnText: "show alert",
+                        onTap:() {
+                        },
                         textSize: 24,
                         backgroundColor: AppColors.red,
                         textColor: AppColors.white,

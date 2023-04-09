@@ -30,3 +30,11 @@ class SignInUser extends AuthenticationEvent {
   @override
   List<Object?> get props => [];
 }
+
+class ResetPassword extends AuthenticationEvent {
+  final String email;
+  ResetPassword(this.email);
+
+  @override
+  List<Object?> get props => [];
+}
